@@ -1,3 +1,4 @@
+const movies = require('../src/data');
 // Iteration 1: All directors - Get the array of all directors.
 // _Bonus_: Remove duplicates from the array.
 function getAllDirectors(moviesArray) {
@@ -12,21 +13,10 @@ function howManyMovies(moviesArray) {
 
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
 function scoresAverage(moviesArray) {
-  if (moviesArray.length === 0) return 0;
-
-  // Filter out movies without a valid score and handle undefined or null scores
-  const validScores = moviesArray
-    .map(movie => movie.score)
-    .filter(score => typeof score === 'number');
-
-  if (validScores.length === 0) return 0;
-
-  // Calculate average and round to 2 decimal places
-  const totalScore = validScores.reduce((acc, score) => acc + score, 0);
-  const average = totalScore / validScores.length;
-  return parseFloat(average.toFixed(2));
+  if(moviesArray.length === 0) return 0;      
+  const total = moviesArray.map(movie=>movie.score || 0 ).reduce((total,sum)=>total+sum,0)  
+  return  Math.round((total/moviesArray.length)*100)/100;   
 }
-
 
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
